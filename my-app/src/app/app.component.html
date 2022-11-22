@@ -1,0 +1,109 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">My Example Ballot dApp</h1>
+  <div class="col-lg-6 mx-auto">
+    <div *ngIf="!wallet">
+      <p class="lead mb-4">Choose your connection method.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button
+          (click)="createWallet()"
+          type="button"
+          class="btn btn-primary btn-lg px-4 gap-3"
+        >
+          Create a Wallet
+        </button>
+        <button type="button" class="btn btn-success btn-lg px-4 gap-3">
+          Connect to a wallet
+        </button>
+        <button disabled type="button" class="btn btn-info btn-lg px-4 gap-3">
+          Import a Wallet
+        </button>
+      </div>
+    </div>
+    <div *ngIf="wallet">
+      <p class="lead mb-4">This is your address: {{ this.wallet.address }}.</p>
+      <p class="lead mb-4">
+        The token contract is: {{ tokenContractAddress }}.
+      </p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div class="card p-2 m-2">
+          <p>Ether Balance:</p>
+          <p>{{ etherBalance }}</p>
+        </div>
+
+        <div class="card p-2 m-2">
+          <p>Token Balance:</p>
+          <p>{{ tokenBalance }}</p>
+        </div>
+
+        <div class="card p-2 m-2">
+          <p>Voting Power:</p>
+          <p>{{ votePower }}</p>
+        </div>
+      </div>
+
+      <div>
+        <p>Vote:</p>
+
+        <div class="list-group w-auto">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action d-flex gap-3 py-3"
+            aria-current="true"
+          >
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <h6 class="mb-0">Voting Options</h6>
+                <p class="mb-0 opacity-75">0 Chocolate</p>
+                <p class="mb-0 opacity-75">1 Vanilla</p>
+                <p class="mb-0 opacity-75">2 Lemon</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <input
+          #voteId
+          type="number"
+          min="0"
+          [max]="votePower"
+          placeholder="0"
+        />
+        <button
+          (click)="vote(voteId.value)"
+          type="button"
+          class="btn btn-success btn-sm px-4 mx-2"
+        >
+          Vote
+        </button>
+      </div>
+
+      <div>
+        <p>Request tokens:</p>
+        <button
+          (click)="request()"
+          type="button"
+          class="btn btn-success btn-sm px-4 mx-2"
+        >
+          Request
+        </button>
+      </div>
+
+      <div>
+        <p>Query results:</p>
+        <button
+          (click)="getWinner()"
+          type="button"
+          class="btn btn-info btn-sm px-4 mx-2"
+        >
+          Query
+        </button>
+      </div>
+    </div>
+    
+    
+    <div *ngIf="winnerProposal">
+      <p class="lead mb-4">The winning proposal is: {{ this.winnerProposal }}.</p>
+    </div>
+  
+  </div>
+</div>
